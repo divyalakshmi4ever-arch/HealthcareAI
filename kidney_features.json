@@ -1,0 +1,66 @@
+{
+  "target_column": "class",
+  "target_labels": {
+    "notckd": 0,
+    "ckd": 1
+  },
+  "positive_class": "ckd",
+  "features": [
+    "age",
+    "bp",
+    "sg",
+    "al",
+    "su",
+    "rbc",
+    "pc",
+    "pcc",
+    "ba",
+    "bgr",
+    "bu",
+    "sc",
+    "sod",
+    "pot",
+    "hemo",
+    "pcv",
+    "wbcc",
+    "rbcc",
+    "htn",
+    "dm",
+    "cad",
+    "appet",
+    "pe",
+    "ane"
+  ],
+  "numeric_features": [
+    "age",
+    "bp",
+    "bgr",
+    "bu",
+    "sc",
+    "sod",
+    "pot",
+    "hemo",
+    "pcv",
+    "wbcc",
+    "rbcc"
+  ],
+  "categorical_features": [
+    "sg",
+    "al",
+    "su",
+    "rbc",
+    "pc",
+    "pcc",
+    "ba",
+    "htn",
+    "dm",
+    "cad",
+    "appet",
+    "pe",
+    "ane"
+  ],
+  "missing_value_preprocessing": {
+    "numeric": "median imputation fitted on training data",
+    "categorical": "explicit __missing__ category"
+  }
+}
