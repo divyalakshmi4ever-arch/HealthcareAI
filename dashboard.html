@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Dashboard | HealthcareAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Hackathon Demo Banner -->
+  <div class="demo-banner">
+    <span class="badge" data-i18n="banner_badge">Hackathon Prototype</span>
+    <span data-i18n="banner_text">Simulated Patient Records • Non-Diagnostic System • Sample Vitals</span>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="navbar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <path d="M12 5v6"/>
+            <path d="M9 8h6"/>
+          </svg>
+        </div>
+        HealthcareAI
+        <span class="brand-badge">PROTOTYPE</span>
+      </a>
+
+      <button class="btn-mobile-toggle" aria-label="Toggle Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></li>
+        <li><a href="dashboard.html" class="nav-link active" data-i18n="nav_dashboard">Patient Dashboard</a></li>
+        <li><a href="screening.html" class="nav-link" data-i18n="nav_screening">Risk Screening</a></li>
+        <li><a href="results.html" class="nav-link" data-i18n="nav_results">AI Results Demo</a></li>
+        <li><a href="records.html" class="nav-link" data-i18n="nav_records">Health Records</a></li>
+        <li><a href="consultation.html" class="nav-link" data-i18n="nav_consult">Doctor Teleconsult</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- FEATURE 2: Tamil / English Language Switcher -->
+        <div class="lang-toggle-wrap" title="Change Language / மொழியை மாற்றவும்">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ta">தமிழ்</button>
+        </div>
+
+        <a href="screening.html" class="btn btn-primary btn-sm">
+          <span data-i18n="nav_start_btn">New Screening</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Patient Header Card -->
+    <div class="card" style="margin-bottom: 24px; background: linear-gradient(135deg, #ffffff, #f0f9ff); border-left: 5px solid var(--primary);">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 18px;">
+          <div style="width: 64px; height: 64px; border-radius: var(--radius-full); background: linear-gradient(135deg, #0284c7, #0ea5e9); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; box-shadow: var(--shadow-sm);">
+            SJ
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <h1 style="font-size: 1.6rem; font-weight: 800; color: var(--secondary);" id="patientNameHeader">Sarah Jenkins</h1>
+              <span class="badge badge-info" id="patientIdBadge">ID: HC-2026-981</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">
+              Female, 42 years • Blood Group: <strong>O+</strong> • Height: 168 cm • Weight: 68.5 kg • Allergies: Penicillin
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <a href="screening.html" class="btn btn-primary btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            <span>Run Health Check</span>
+          </a>
+          <a href="consultation.html" class="btn btn-secondary btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path>
+              <rect x="2" y="6" width="14" height="12" rx="2"></rect>
+            </svg>
+            <span>Virtual Consult</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Vitals Metrics Grid -->
+    <div class="page-header" style="margin-bottom: 16px;">
+      <div>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--secondary);">Live Vitals &amp; Biomarkers (Sample Data)</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Synced from connected wearable simulator &bull; Last updated 12 mins ago</p>
+      </div>
+      <span class="badge badge-success">● Connected &bull; Sync Active</span>
+    </div>
+
+    <div class="grid grid-cols-3" style="margin-bottom: 28px;">
+      <!-- Metric 1: Resting Heart Rate -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-label">Resting Heart Rate</div>
+          <div class="metric-value">74 <span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">bpm</span></div>
+          <div class="metric-sub" style="color: var(--success);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Optimal Baseline (60-80)</span>
+          </div>
+        </div>
+        <div class="metric-icon" style="background: #fee2e2; color: #ef4444;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+      </div>
+
+      <!-- Metric 2: Blood Pressure -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-label">Blood Pressure</div>
+          <div class="metric-value">122 / 80 <span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">mmHg</span></div>
+          <div class="metric-sub" style="color: #92400e;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <span>Borderline Pre-Hypertension</span>
+          </div>
+        </div>
+        <div class="metric-icon" style="background: #fef3c7; color: #d97706;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path></svg>
+        </div>
+      </div>
+
+      <!-- Metric 3: Fasting Blood Glucose -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-label">Fasting Blood Glucose</div>
+          <div class="metric-value">96 <span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">mg/dL</span></div>
+          <div class="metric-sub" style="color: var(--success);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Normal Fasting (< 100 mg/dL)</span>
+          </div>
+        </div>
+        <div class="metric-icon" style="background: #e0f2fe; color: #0284c7;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2-5.5 9h11L12 2z"></path><path d="M12 22a7 7 0 0 0 7-7c0-2-2-4-7-9-5 5-7 7-7 9a7 7 0 0 0 7 7z"></path></svg>
+        </div>
+      </div>
+
+      <!-- Metric 4: Blood Oxygen (SpO2) -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-label">Oxygen Saturation (SpO2)</div>
+          <div class="metric-value">98 <span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">%</span></div>
+          <div class="metric-sub" style="color: var(--success);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Optimal Range (95-100%)</span>
+          </div>
+        </div>
+        <div class="metric-icon" style="background: #ccfbf1; color: #0d9488;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- Metric 5: Body Mass Index (BMI) -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-label">Body Mass Index (BMI)</div>
+          <div class="metric-value">24.3 <span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">kg/m²</span></div>
+          <div class="metric-sub" style="color: var(--success);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Normal Weight (18.5 - 24.9)</span>
+          </div>
+        </div>
+        <div class="metric-icon" style="background: #eef2ff; color: #6366f1;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- Metric 6: Sleep Duration -->
+      <div class="metric-card">
+        <div>
+          <div class="metric-label">Sleep Duration</div>
+          <div class="metric-value">7.4 <span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">hrs</span></div>
+          <div class="metric-sub" style="color: var(--success);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>+35 mins vs 7-day average</span>
+          </div>
+        </div>
+        <div class="metric-icon" style="background: #f1f5f9; color: #475569;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 Column Section: Vitals Trend Chart & AI Risk Card -->
+    <div class="grid grid-cols-2" style="margin-bottom: 28px;">
+      
+      <!-- 7-Day Trend Chart (Interactive SVG) -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            7-Day Blood Pressure &amp; Heart Rate Trend
+          </h3>
+          <span class="badge badge-info">Sample Wearable Data</span>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+          Observed resting readings over the past 7 days. Systolic pressure (blue line) vs Resting Heart Rate (pink bars).
+        </p>
+
+        <!-- SVG Line/Bar Chart -->
+        <div style="background: #fafafa; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 16px; overflow-x: auto;">
+          <svg viewBox="0 0 520 220" style="width: 100%; height: auto; min-width: 440px;">
+            <!-- Grid Lines -->
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#e2e8f0" stroke-dasharray="4" />
+            <line x1="40" y1="75" x2="500" y2="75" stroke="#e2e8f0" stroke-dasharray="4" />
+            <line x1="40" y1="120" x2="500" y2="120" stroke="#e2e8f0" stroke-dasharray="4" />
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#e2e8f0" stroke-dasharray="4" />
+
+            <!-- Y Axis Labels -->
+            <text x="12" y="34" font-size="10" fill="#94a3b8">140</text>
+            <text x="12" y="79" font-size="10" fill="#94a3b8">120</text>
+            <text x="12" y="124" font-size="10" fill="#94a3b8">100</text>
+            <text x="18" y="169" font-size="10" fill="#94a3b8">80</text>
+
+            <!-- Bars for Heart Rate (Pink bars) -->
+            <rect x="75" y="130" width="16" height="50" rx="3" fill="#fecdd3" opacity="0.8" />
+            <rect x="135" y="134" width="16" height="46" rx="3" fill="#fecdd3" opacity="0.8" />
+            <rect x="195" y="126" width="16" height="54" rx="3" fill="#fecdd3" opacity="0.8" />
+            <rect x="255" y="132" width="16" height="48" rx="3" fill="#fecdd3" opacity="0.8" />
+            <rect x="315" y="128" width="16" height="52" rx="3" fill="#fecdd3" opacity="0.8" />
+            <rect x="375" y="135" width="16" height="45" rx="3" fill="#fecdd3" opacity="0.8" />
+            <rect x="435" y="130" width="16" height="50" rx="3" fill="#fecdd3" opacity="0.8" />
+
+            <!-- Line for Systolic BP (Blue line) -->
+            <!-- Points: Day 1 (126 -> y=62), Day 2 (124 -> y=66), Day 3 (130 -> y=53), Day 4 (128 -> y=57), Day 5 (122 -> y=71), Day 6 (125 -> y=64), Day 7 (122 -> y=71) -->
+            <polyline
+              fill="none"
+              stroke="#0284c7"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              points="83,62 143,66 203,53 263,57 323,71 383,64 443,71"
+            />
+
+            <!-- Circles on Systolic BP line -->
+            <circle cx="83" cy="62" r="4" fill="#0284c7" stroke="#fff" stroke-width="2" />
+            <circle cx="143" cy="66" r="4" fill="#0284c7" stroke="#fff" stroke-width="2" />
+            <circle cx="203" cy="53" r="4" fill="#0284c7" stroke="#fff" stroke-width="2" />
+            <circle cx="263" cy="57" r="4" fill="#0284c7" stroke="#fff" stroke-width="2" />
+            <circle cx="323" cy="71" r="4" fill="#0284c7" stroke="#fff" stroke-width="2" />
+            <circle cx="383" cy="64" r="4" fill="#0284c7" stroke="#fff" stroke-width="2" />
+            <circle cx="443" cy="71" r="4" fill="#0284c7" stroke="#fff" stroke-width="2" />
+
+            <!-- X Axis Day Labels -->
+            <text x="73" y="198" font-size="11" fill="#64748b">Mon</text>
+            <text x="133" y="198" font-size="11" fill="#64748b">Tue</text>
+            <text x="193" y="198" font-size="11" fill="#64748b">Wed</text>
+            <text x="253" y="198" font-size="11" fill="#64748b">Thu</text>
+            <text x="313" y="198" font-size="11" fill="#64748b">Fri</text>
+            <text x="373" y="198" font-size="11" fill="#64748b">Sat</text>
+            <text x="433" y="198" font-size="11" fill="#64748b">Sun</text>
+          </svg>
+        </div>
+
+        <div style="display: flex; gap: 16px; margin-top: 12px; font-size: 0.8rem; color: var(--secondary-muted); justify-content: center;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 12px; height: 3px; background: #0284c7; display: inline-block;"></span>
+            <span>Systolic Blood Pressure (Target < 120 mmHg)</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 12px; height: 10px; background: #fecdd3; display: inline-block; border-radius: 2px;"></span>
+            <span>Resting Heart Rate (bpm)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Risk Summary & Health Status -->
+      <div class="card" style="display: flex; flex-direction: column;">
+        <div class="card-header">
+          <h3 class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            AI Screening Risk Status
+          </h3>
+          <span class="badge badge-ai">Simulated Analysis</span>
+        </div>
+
+        <div style="background: var(--bg-alt); padding: 18px; border-radius: var(--radius-sm); margin-bottom: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <span style="font-weight: 700; color: var(--secondary);">Composite Health Risk Index</span>
+            <span class="badge badge-moderate" id="dashRiskCategory">Moderate (Score: 24/100)</span>
+          </div>
+          <div style="background: #e2e8f0; height: 8px; border-radius: var(--radius-full); overflow: hidden;">
+            <div style="background: linear-gradient(90deg, #10b981, #f59e0b); width: 24%; height: 100%;"></div>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">
+            Scores between 0-30 represent baseline low/moderate quadrant.
+          </p>
+        </div>
+
+        <div style="flex: 1;">
+          <h4 style="font-size: 0.92rem; font-weight: 700; color: var(--secondary); margin-bottom: 8px;">Key Clinical Factor Observations:</h4>
+          <ul style="font-size: 0.86rem; color: var(--secondary-muted); list-style: none; display: flex; flex-direction: column; gap: 8px;">
+            <li style="display: flex; gap: 8px;">
+              <span style="color: #f59e0b; font-weight: 800;">●</span>
+              <span><strong>Pre-hypertensive readings:</strong> Systolic resting averages hover near 124 mmHg. Recommend lower dietary sodium.</span>
+            </li>
+            <li style="display: flex; gap: 8px;">
+              <span style="color: #10b981; font-weight: 800;">●</span>
+              <span><strong>Metabolic parameters:</strong> Fasting glucose (96 mg/dL) and BMI (24.3) remain securely in healthy bands.</span>
+            </li>
+            <li style="display: flex; gap: 8px;">
+              <span style="color: #0284c7; font-weight: 800;">●</span>
+              <span><strong>Cardiovascular genetics:</strong> Positive family history noted; regular monitoring advised.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 18px; display: flex; gap: 10px;">
+          <a href="results.html" class="btn btn-outline btn-sm" style="flex: 1;">View Full Explainability &rarr;</a>
+          <a href="screening.html" class="btn btn-primary btn-sm">Retake Screening</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURE 4: My Appointments & Consultation Actions -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <h3 class="card-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span data-i18n="my_appointments_title">My Booked Appointments</span>
+        </h3>
+        <a href="consultation.html#doctorAvailability" class="btn btn-primary btn-sm">
+          <span data-i18n="btn_book_appointment">Book New Appointment</span>
+        </a>
+      </div>
+
+      <!-- Container dynamically filled with booked appointments from localStorage -->
+      <div id="myAppointmentsContainer" style="display:flex; flex-direction:column; gap:12px;">
+        <!-- Filled by renderAppointmentsList() -->
+      </div>
+    </div>
+
+    <!-- FEATURE 1 (Preview in Dashboard): Upcoming Community Health Camp -->
+    <div class="card" style="margin-bottom: 24px; background: linear-gradient(135deg, #f0fdf4, #ffffff); border-left: 5px solid var(--accent-teal);">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 44px; height: 44px; border-radius: var(--radius-sm); background: #ccfbf1; color: #0f766e; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+            🏥
+          </div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--secondary);">Community Health Outreach Camps (Demo Schedule)</h4>
+              <span class="badge badge-warning" data-i18n="demo_badge">DEMO DATA</span>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 2px;">
+              Next scheduled camp: <strong>Primary Health Center Outreach</strong> (Oct 24, 2026 • 08:30 AM) • Free BP &amp; Glucose Checks
+            </p>
+          </div>
+        </div>
+        <a href="index.html#communityCampsGrid" class="btn btn-outline btn-sm">
+          <span>View All Camp Schedules &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-disclaimer">
+        <strong>⚠️ Prototype Notice:</strong> Patient dashboard vitals and risk scores are generated from simulated telemetry for hackathon evaluation only. They are not real medical diagnostics.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 HealthcareAI Project • Hackathon Innovation Prototype</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="screening.html">Screening</a>
+          <a href="results.html">Results</a>
+          <a href="records.html">Records</a>
+          <a href="consultation.html">Teleconsult</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    function renderAppointmentsList() {
+      const container = document.getElementById('myAppointmentsContainer');
+      if (!container) return;
+
+      const apts = JSON.parse(localStorage.getItem('healthcare_appointments') || '[]');
+      const lang = getCurrentLang();
+      const btnJoinText = (lang === 'ta') ? 'ஆலோசனையில் இணைக' : 'Join Consultation Demo';
+
+      if (apts.length === 0) {
+        container.innerHTML = `
+          <div style="padding:20px; text-align:center; color:#64748b; background:var(--bg-alt); border-radius:var(--radius-sm);">
+            No upcoming appointments found. <a href="consultation.html#doctorAvailability">Click here to book a demo slot</a>.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = apts.map(apt => `
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; background: var(--bg-alt); border-radius: var(--radius-sm); border-left: 3px solid #0284c7;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 44px; height: 44px; border-radius: var(--radius-full); background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-weight: 800;">
+              ${apt.doctorName.split(' ')[1] ? apt.doctorName.split(' ')[1][0] : 'DR'}
+            </div>
+            <div>
+              <div style="font-weight: 700; color: var(--secondary);">${apt.doctorName}</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">${apt.specialty} • ${apt.type}</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 14px; flex-wrap:wrap;">
+            <div style="font-size: 0.88rem; color: var(--secondary);">
+              🗓️ <strong>${apt.date}</strong> at <strong>${apt.time}</strong>
+            </div>
+            <span class="badge badge-success">Confirmed</span>
+            <a href="consultation.html?aptId=${apt.id}" class="btn btn-primary btn-sm">
+              <span>${btnJoinText} &rarr;</span>
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Dynamically sync assessment from localStorage if exists
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAppointmentsList();
+
+      const assessmentData = localStorage.getItem('currentAssessment');
+      if (assessmentData) {
+        try {
+          const parsed = JSON.parse(assessmentData);
+          const badge = document.getElementById('dashRiskCategory');
+          if (badge && parsed.overallRisk) {
+            badge.textContent = `${parsed.overallRisk} (${parsed.riskScore}/100)`;
+            if (parsed.riskCategory === 'elevated') {
+              badge.className = 'badge badge-elevated';
+            } else if (parsed.riskCategory === 'moderate') {
+              badge.className = 'badge badge-moderate';
+            } else {
+              badge.className = 'badge badge-low';
+            }
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

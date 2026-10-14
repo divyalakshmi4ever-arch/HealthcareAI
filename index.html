@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthcareAI | Intelligent Preventive Health & Virtual Triage</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Hackathon Demo Banner -->
+  <div class="demo-banner">
+    <span class="badge" data-i18n="banner_badge">Hackathon Prototype</span>
+    <span data-i18n="banner_text">Demonstration Only • Non-Diagnostic System • Simulated Clinical Intelligence</span>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="navbar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <path d="M12 5v6"/>
+            <path d="M9 8h6"/>
+          </svg>
+        </div>
+        HealthcareAI
+        <span class="brand-badge">PROTOTYPE</span>
+      </a>
+
+      <button class="btn-mobile-toggle" aria-label="Toggle Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active" data-i18n="nav_home">Home</a></li>
+        <li><a href="dashboard.html" class="nav-link" data-i18n="nav_dashboard">Patient Dashboard</a></li>
+        <li><a href="screening.html" class="nav-link" data-i18n="nav_screening">Risk Screening</a></li>
+        <li><a href="results.html" class="nav-link" data-i18n="nav_results">AI Results Demo</a></li>
+        <li><a href="records.html" class="nav-link" data-i18n="nav_records">Health Records</a></li>
+        <li><a href="consultation.html" class="nav-link" data-i18n="nav_consult">Doctor Teleconsult</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- FEATURE 2: Tamil / English Language Switcher -->
+        <div class="lang-toggle-wrap" title="Change Language / மொழியை மாற்றவும்">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ta">தமிழ்</button>
+        </div>
+
+        <a href="screening.html" class="btn btn-primary btn-sm">
+          <span data-i18n="nav_start_btn">Start Screening</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <!-- Prototype Warning Notice -->
+    <div class="alert-box alert-warning">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="7" x2="12.01" y2="7"></line>
+      </svg>
+      <div>
+        <div class="alert-title">Prototype & Research Demonstration Notice</div>
+        <div class="alert-text">
+          HealthcareAI is built as a proof-of-concept prototype for our hackathon. All risk evaluations and scores use deterministic sample heuristics. <strong>This application does not provide real medical diagnosis, professional medical advice, or clinical treatments.</strong> Always consult licensed medical professionals for health decisions.
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-pill">
+          <span style="color:#0284c7; font-weight:800;">●</span>
+          Hackathon Edition: Preventive Healthcare AI Platform
+        </div>
+        <h1 class="hero-title">
+          Smart Health Screening &amp; <br>
+          <span class="highlight">Virtual Clinical Triage</span>
+        </h1>
+        <p class="hero-desc">
+          Empowering patients with early risk detection, explainable wellness insights, and instant connectivity to remote clinical specialists.
+        </p>
+        <div class="hero-cta">
+          <a href="screening.html" class="btn btn-primary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            <span>Launch Health Risk Screening</span>
+          </a>
+          <a href="dashboard.html" class="btn btn-secondary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+              <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+              <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+              <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+            </svg>
+            <span>View Patient Dashboard</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hackathon Overview & Core Capabilities -->
+    <section style="margin-bottom: 48px;">
+      <div class="page-header" style="text-align: center; display: block; margin-bottom: 32px;">
+        <h2 class="page-title">Interactive Prototype Modules</h2>
+        <p class="page-subtitle">Explore the five interconnected layers of the HealthcareAI platform prototype.</p>
+      </div>
+
+      <div class="grid grid-cols-3">
+        <!-- Module 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper" style="background:#e0f2fe; color:#0284c7;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">1. Multi-factor Screening</h3>
+          <p class="feature-desc">
+            Structured questionnaire evaluating clinical biometrics (blood pressure, glucose, BMI) and symptom indicators with 1-click demo data fill.
+          </p>
+          <a href="screening.html" class="btn btn-outline btn-sm">Explore Screening &rarr;</a>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper" style="background:#eef2ff; color:#6366f1;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">2. AI Risk Breakdown Demo</h3>
+          <p class="feature-desc">
+            Visual risk gauge, transparent explainability factors, and lifestyle guidance designed for non-diagnostic risk stratification.
+          </p>
+          <a href="results.html" class="btn btn-outline btn-sm">View Demo Results &rarr;</a>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper" style="background:#ccfbf1; color:#0d9488;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 10l5 5-5 5"></path>
+              <path d="M4 4v7a4 4 0 0 0 4 4h12"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">3. Patient Vitals Dashboard</h3>
+          <p class="feature-desc">
+            Continuous health telemetry tracking resting heart rate, blood pressure, oxygen saturation, and personalized wellness alerts.
+          </p>
+          <a href="dashboard.html" class="btn btn-outline btn-sm">Open Dashboard &rarr;</a>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper" style="background:#fef3c7; color:#d97706;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">4. Health Records Hub</h3>
+          <p class="feature-desc">
+            Consolidated timeline of simulated laboratory panels, cardiology reports, and historical vital recordings for clinical continuity.
+          </p>
+          <a href="records.html" class="btn btn-outline btn-sm">View Health Records &rarr;</a>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper" style="background:#d1fae5; color:#059669;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path>
+              <rect x="2" y="6" width="14" height="12" rx="2"></rect>
+            </svg>
+          </div>
+          <h3 class="feature-title">5. Virtual Teleconsultation</h3>
+          <p class="feature-desc">
+            Simulated telehealth room with interactive call controls (mute, camera, timer), live doctor chat simulator, and slot booking.
+          </p>
+          <a href="consultation.html" class="btn btn-outline btn-sm">Launch Teleconsult &rarr;</a>
+        </div>
+
+        <!-- Module 6: Architecture & Standards -->
+        <div class="feature-card" style="border: 2px dashed #cbd5e1;">
+          <div class="feature-icon-wrapper" style="background:#fee2e2; color:#dc2626;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">6. Safety & AI Governance</h3>
+          <p class="feature-desc">
+            Adhering to ethical AI guidelines by avoiding unverified diagnostic claims, enforcing user disclaimers, and promoting physician-in-the-loop triage.
+          </p>
+          <span class="badge badge-warning" style="align-self: flex-start;">Safe By Design</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE 1: Community Health Visit Schedule (Clearly Labeled Demo Data) -->
+    <section class="card" style="margin-bottom: 48px; padding: 32px; background: #ffffff; border-top: 4px solid var(--accent-teal);">
+      <div class="page-header" style="margin-bottom: 20px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <h2 class="page-title" data-i18n="camps_title" style="margin: 0; font-size: 1.55rem;">Community Health Visit Schedule</h2>
+            <span class="badge badge-warning" data-i18n="demo_badge">DEMO DATA</span>
+            <span class="badge" style="background:#ccfbf1; color:#0f766e; font-weight:700;">Field Outreach</span>
+          </div>
+          <p class="page-subtitle" data-i18n="camps_subtitle">Upcoming field screening camps for rural & urban health outreach (Clearly Labeled Demo Schedule)</p>
+        </div>
+        <a href="screening.html" class="btn btn-outline btn-sm">
+          <span>Register for Camp Screening &rarr;</span>
+        </a>
+      </div>
+
+      <!-- Prominent Non-Fictional Claim Alert -->
+      <div class="alert-box alert-warning" style="margin-bottom: 24px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="7" x2="12.01" y2="7"></line>
+        </svg>
+        <div class="alert-text" data-i18n="camps_demo_notice">
+          DEMO SCHEDULE: Sample community outreach events for hackathon demonstration. Not confirmed real-world events.
+        </div>
+      </div>
+
+      <!-- Camp Schedule Cards Grid -->
+      <div class="grid grid-cols-3" id="communityCampsGrid">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </section>
+
+    <!-- How the User Flow Works (Interactive Diagram) -->
+    <section class="card" style="margin-bottom: 40px; padding: 32px;">
+      <h3 class="card-title" style="margin-bottom: 16px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        Prototype Architecture &amp; User Flow
+      </h3>
+      <p style="color:var(--text-muted); margin-bottom: 24px;">
+        Designed to simulate an end-to-end digital health triage experience for patients and clinicians during hackathon presentations:
+      </p>
+
+      <div class="grid grid-cols-4" style="text-align: center;">
+        <div style="padding: 16px; background:var(--bg-main); border-radius:var(--radius-md);">
+          <div style="font-size:1.8rem; font-weight:900; color:var(--primary); margin-bottom:4px;">01</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:6px;">Patient Input</h4>
+          <p style="font-size:0.84rem; color:var(--text-muted);">Biometrics, lifestyle habits, and symptoms questionnaire.</p>
+        </div>
+        <div style="padding: 16px; background:var(--bg-main); border-radius:var(--radius-md);">
+          <div style="font-size:1.8rem; font-weight:900; color:var(--accent-ai); margin-bottom:4px;">02</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:6px;">Risk Engine</h4>
+          <p style="font-size:0.84rem; color:var(--text-muted);">Synthetic rule-based scoring with explainability breakdown.</p>
+        </div>
+        <div style="padding: 16px; background:var(--bg-main); border-radius:var(--radius-md);">
+          <div style="font-size:1.8rem; font-weight:900; color:var(--warning); margin-bottom:4px;">03</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:6px;">Patient Feedback</h4>
+          <p style="font-size:0.84rem; color:var(--text-muted);">Visual gauges, preventive recommendations, &amp; disclaimers.</p>
+        </div>
+        <div style="padding: 16px; background:var(--bg-main); border-radius:var(--radius-md);">
+          <div style="font-size:1.8rem; font-weight:900; color:var(--success); margin-bottom:4px;">04</div>
+          <h4 style="font-size:1rem; font-weight:700; margin-bottom:6px;">Doctor Triage</h4>
+          <p style="font-size:0.84rem; color:var(--text-muted);">1-click teleconsultation &amp; appointment scheduling.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Demonstration Banner Callout -->
+    <section class="card" style="background: linear-gradient(135deg, #0f172a, #1e293b); color:white; border:none; padding:32px;">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px;">
+        <div>
+          <span class="badge" style="background:#38bdf8; color:#0f172a; margin-bottom:10px;">Ready to Test</span>
+          <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:8px;">Experience the Live Hackathon Screening</h3>
+          <p style="color:#94a3b8; max-width:600px; font-size:0.92rem;">
+            Click below to auto-populate sample biometric measurements and preview how the simulated AI explains risk factors and connects with virtual doctors.
+          </p>
+        </div>
+        <div style="display:flex; gap:12px;">
+          <a href="screening.html" class="btn btn-primary btn-lg">Launch Screening Form</a>
+          <a href="consultation.html" class="btn btn-secondary btn-lg" style="background:rgba(255,255,255,0.1); color:white; border-color:rgba(255,255,255,0.2);">Doctor Room</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-disclaimer">
+        <strong>⚠️ Non-Medical Prototype Disclaimer:</strong> HealthcareAI is developed exclusively for demonstration purposes as part of our hackathon entry. It is NOT certified as a medical device (SaMD) by the FDA, EMA, or any national health regulatory authority. The risk scores and AI suggestions are synthetic simulations and must never substitute for clinical judgment or professional medical care.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 HealthcareAI Project • Hackathon Innovation Prototype</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="screening.html">Screening</a>
+          <a href="results.html">Results</a>
+          <a href="records.html">Records</a>
+          <a href="consultation.html">Teleconsult</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    function renderCommunityCamps() {
+      const grid = document.getElementById('communityCampsGrid');
+      if (!grid) return;
+      const camps = JSON.parse(localStorage.getItem('healthcare_camps') || '[]');
+      const lang = getCurrentLang();
+
+      grid.innerHTML = camps.map(camp => {
+        const title = (lang === 'ta' && camp.tamilName) ? camp.tamilName : camp.name;
+        const services = (lang === 'ta' && camp.servicesTa) ? camp.servicesTa : camp.services;
+        const serviceTags = services.map(s => `<span class="service-tag">✓ ${s}</span>`).join('');
+
+        return `
+          <div class="camp-card">
+            <div class="camp-header">
+              <div>
+                <span class="badge" style="background:#e0f2fe; color:#0369a1; font-size:0.75rem; margin-bottom:6px;">${camp.status}</span>
+                <h3 class="camp-location" style="font-size:1.1rem;">${title}</h3>
+              </div>
+            </div>
+            <div style="font-size:0.85rem; color:#475569; margin-bottom:8px;">
+              📍 <strong>Location:</strong> ${camp.location}
+            </div>
+            <div class="camp-datetime">
+              🗓️ <strong>Date & Time:</strong> ${camp.date} • ${camp.time}
+            </div>
+            <div style="font-size:0.8rem; font-weight:700; color:#334155; margin-bottom:4px;">
+              ${lang === 'ta' ? 'வழங்கப்படும் இலவச பரிசோதனைகள்:' : 'Available Screening Services:'}
+            </div>
+            <div class="camp-services">
+              ${serviceTags}
+            </div>
+            <div style="margin-top:auto; padding-top:12px; border-top:1px dashed #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+              <small style="color:#64748b; font-size:0.76rem;">Team: ${camp.doctorsAssigned}</small>
+              <a href="screening.html" class="btn btn-primary btn-sm" style="font-size:0.78rem; padding:4px 10px;">
+                ${lang === 'ta' ? 'பரிசோதனை பதிவு' : 'Pre-Register Demo'}
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCommunityCamps();
+    });
+  </script>
+</body>
+</html>

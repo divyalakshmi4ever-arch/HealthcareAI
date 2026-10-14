@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remote Doctor Teleconsultation | HealthcareAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Hackathon Demo Banner -->
+  <div class="demo-banner">
+    <span class="badge" data-i18n="banner_badge">Hackathon Prototype</span>
+    <span data-i18n="banner_text">Simulated Telehealth Video Room • Doctor Interaction Demo • Non-Emergency</span>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="navbar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <path d="M12 5v6"/>
+            <path d="M9 8h6"/>
+          </svg>
+        </div>
+        HealthcareAI
+        <span class="brand-badge">PROTOTYPE</span>
+      </a>
+
+      <button class="btn-mobile-toggle" aria-label="Toggle Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></li>
+        <li><a href="dashboard.html" class="nav-link" data-i18n="nav_dashboard">Patient Dashboard</a></li>
+        <li><a href="screening.html" class="nav-link" data-i18n="nav_screening">Risk Screening</a></li>
+        <li><a href="results.html" class="nav-link" data-i18n="nav_results">AI Results Demo</a></li>
+        <li><a href="records.html" class="nav-link" data-i18n="nav_records">Health Records</a></li>
+        <li><a href="consultation.html" class="nav-link active" data-i18n="nav_consult">Doctor Teleconsult</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- FEATURE 2: Tamil / English Language Switcher -->
+        <div class="lang-toggle-wrap" title="Change Language / மொழியை மாற்றவும்">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ta">தமிழ்</button>
+        </div>
+
+        <button class="btn btn-primary btn-sm" onclick="openBookingModal('Dr. Elena Rostova')">
+          <span data-i18n="btn_book_appointment">Book Consultation</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Prototype Warning Notice -->
+    <div class="alert-box alert-warning">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="7" x2="12.01" y2="7"></line>
+      </svg>
+      <div>
+        <div class="alert-title" data-i18n="disclaimer_title">Simulated Telehealth Consultation Prototype</div>
+        <div class="alert-text">
+          This virtual examination room, availability schedule, and doctor response system are interactive mockups created for hackathon demonstrations. <strong>Real-time video or audio calling is not connected. Do not use this for real-time emergency healthcare.</strong> In case of urgent distress, call 911 or your local emergency number.
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" data-i18n="tele_title">Virtual Doctor Teleconsultation</h1>
+        <p class="page-subtitle" data-i18n="tele_subtitle">Real-time encrypted video connection, biometric sharing, and physician clinical notes.</p>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <span class="badge badge-success" style="font-size: 0.85rem; padding: 6px 12px;">● Room ID: TELE-9821</span>
+        <button type="button" id="btnJoinDoctorConsultation" class="btn btn-primary">
+          Join Doctor Consultation
+        </button>
+      </div>
+    </div>
+    <p class="form-hint" style="margin-top: -16px; margin-bottom: 24px;">
+      Google Meet uses one shared prototype link. Replace its placeholder in
+      <code>js/consultation.js</code> with your real meeting URL. Join that actual
+      meeting and allow camera and microphone access in your browser for live video
+      and audio; the placeholder does not provide a working call.
+    </p>
+
+    <!-- FEATURE 5: TELEPRESENCE CONSULTATION FLOW (3 DISTINCT STATES) -->
+    <div id="telepresenceWorkflowSection" style="margin-bottom: 40px;">
+      
+      <!-- Flow State Step Indicator Bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; background:#f1f5f9; padding:8px 16px; border-radius:var(--radius-md); margin-bottom:18px; border:1px solid var(--border-light); flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:0.85rem; font-weight:700; color:#334155;">Telepresence State:</span>
+          <span id="pillStateBooked" class="tele-state-badge" style="background:#dbeafe; color:#1e40af; cursor:pointer;" onclick="transitionTeleState('booked')">
+            1. Appointment Booked
+          </span>
+          <span style="color:#94a3b8;">&rarr;</span>
+          <span id="pillStateWaiting" class="tele-state-badge" style="background:#fef3c7; color:#92400e; cursor:pointer;" onclick="transitionTeleState('waiting')">
+            2. Waiting to Join
+          </span>
+          <span style="color:#94a3b8;">&rarr;</span>
+          <span id="pillStateActive" class="tele-state-badge" style="background:#dcfce7; color:#166534; cursor:pointer;" onclick="transitionTeleState('active')">
+            3. Consultation Demo
+          </span>
+        </div>
+
+        <span class="badge badge-warning">PROTOTYPE FLOW</span>
+      </div>
+
+      <!-- STATE 1: Appointment Booked Card -->
+      <div id="teleStateBooked" class="tele-state-wrap active-state">
+        <div class="card" style="border-left: 5px solid var(--primary); padding: 28px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
+            <div>
+              <span class="badge badge-info" style="margin-bottom:8px;" data-i18n="state_booked_title">State 1: Appointment Booked</span>
+              <h2 style="font-size:1.45rem; font-weight:800; color:var(--secondary); margin-bottom:4px;">
+                Consultation Confirmed with <span class="disp-apt-doctor">Dr. Elena Rostova, MD</span>
+              </h2>
+              <p style="font-size:0.9rem; color:var(--text-muted);">
+                Specialty: <strong class="disp-apt-specialty">Internal Medicine &amp; Preventive Care</strong> • Appointment ID: <span class="disp-apt-id">APT-201</span>
+              </p>
+            </div>
+            <span class="badge badge-success" style="font-size:0.9rem; padding:6px 14px;">Confirmed (Demo)</span>
+          </div>
+
+          <div class="grid grid-cols-3" style="background:var(--bg-alt); padding:16px; border-radius:var(--radius-sm); margin-bottom:20px;">
+            <div>
+              <div class="metric-label">Scheduled Date</div>
+              <div style="font-weight:700; font-size:1.1rem; color:var(--secondary);" class="disp-apt-date">2026-10-16</div>
+            </div>
+            <div>
+              <div class="metric-label">Confirmed Time</div>
+              <div style="font-weight:700; font-size:1.1rem; color:var(--primary);" class="disp-apt-time">10:30 AM EST</div>
+            </div>
+            <div>
+              <div class="metric-label">Consultation Format</div>
+              <div style="font-weight:700; font-size:1.1rem; color:var(--secondary);">Encrypted Video Demo</div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:24px;">
+            <h4 style="font-size:0.95rem; font-weight:700; color:var(--secondary); margin-bottom:8px;">Pre-Consultation Checklist:</h4>
+            <ul style="font-size:0.88rem; color:#475569; list-style:none; display:flex; flex-direction:column; gap:6px;">
+              <li>✓ Find a well-lit, quiet location for your virtual visit.</li>
+              <li>✓ Have recent blood pressure cuff or glucose readings available.</li>
+              <li>✓ AI risk screening preliminary factor summary is automatically attached to this session.</li>
+            </ul>
+          </div>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <button onclick="transitionTeleState('waiting')" class="btn btn-primary btn-lg">
+              <span data-i18n="btn_proceed_waiting">Proceed to Waiting Lobby &rarr;</span>
+            </button>
+            <a href="#doctorAvailability" class="btn btn-secondary btn-lg">Change Slot / Select Doctor</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE 2: Waiting to Join Pre-Call Lobby -->
+      <div id="teleStateWaiting" class="tele-state-wrap">
+        <div class="card" style="border-left: 5px solid #f59e0b; padding: 28px;">
+          <div style="margin-bottom:18px;">
+            <span class="badge badge-warning" style="margin-bottom:8px;" data-i18n="state_waiting_title">State 2: Waiting to Join Room</span>
+            <h2 style="font-size:1.45rem; font-weight:800; color:var(--secondary);">
+              Pre-Call Device &amp; Room Readiness Check
+            </h2>
+            <p style="font-size:0.9rem; color:var(--text-muted);">
+              Dr. <span class="disp-apt-doctor">Elena Rostova</span> has opened Room <strong>#TELE-9821</strong>. Test your hardware before joining.
+            </p>
+          </div>
+
+          <!-- Device Test Grid -->
+          <div class="device-test-grid">
+            <!-- Camera Check -->
+            <div class="device-test-card">
+              <div style="width:36px; height:36px; border-radius:var(--radius-sm); background:#dcfce7; color:#166534; display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+                📹
+              </div>
+              <div>
+                <div style="font-size:0.85rem; font-weight:700; color:var(--secondary);">Video Camera</div>
+                <div style="font-size:0.78rem; color:#16a34a; font-weight:600;">✓ Ready (Simulated 1080p)</div>
+              </div>
+            </div>
+
+            <!-- Microphone Check with Animated Waves -->
+            <div class="device-test-card">
+              <div style="width:36px; height:36px; border-radius:var(--radius-sm); background:#dbeafe; color:#1e40af; display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+                🎙️
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:0.85rem; font-weight:700; color:var(--secondary); display:flex; justify-content:space-between;">
+                  <span>Microphone</span>
+                  <span style="font-size:0.75rem; color:#16a34a;">Active</span>
+                </div>
+                <div class="sound-meter" style="margin-top:4px;">
+                  <div class="sound-bar" style="height:8px;"></div>
+                  <div class="sound-bar" style="height:14px;"></div>
+                  <div class="sound-bar" style="height:18px;"></div>
+                  <div class="sound-bar" style="height:10px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Network Latency Check -->
+            <div class="device-test-card">
+              <div style="width:36px; height:36px; border-radius:var(--radius-sm); background:#fef3c7; color:#92400e; display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+                📶
+              </div>
+              <div>
+                <div style="font-size:0.85rem; font-weight:700; color:var(--secondary);">Connection Ping</div>
+                <div style="font-size:0.78rem; color:#16a34a; font-weight:600;">✓ Stable (18 ms latency)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert-box alert-info" style="margin-bottom:24px;">
+            <div class="alert-text">
+              Note: This is a hackathon simulation. When you click <strong>"Join Consultation Demo Now"</strong>, the simulated video room will open with pre-loaded consultation context.
+            </div>
+          </div>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <button onclick="transitionTeleState('active')" class="btn btn-primary btn-lg" style="background:#16a34a; border-color:#15803d;">
+              <span data-i18n="btn_join_active">🚀 Join Consultation Demo Now</span>
+            </button>
+            <button onclick="transitionTeleState('booked')" class="btn btn-secondary btn-lg">
+              &larr; Back to Appointment Details
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE 3: Active Simulated Consultation Demo -->
+      <div id="teleStateActive" class="tele-state-wrap">
+        <section class="card" style="padding: 16px; background: #0f172a; border-color: #334155;">
+          <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <span class="badge" style="background:#38bdf8; color:#0f172a; font-weight:800;" data-i18n="state_active_title">
+              State 3: Simulated Consultation Demo
+            </span>
+            <span class="badge badge-warning" style="font-size:0.75rem;">
+              ⚠️ SIMULATED CALL • NO REAL-TIME WEBRTC AUDIO/VIDEO
+            </span>
+          </div>
+
+          <div class="telehealth-layout">
+            
+            <!-- Video Stream Container -->
+            <div class="video-container" id="activeCallView">
+              <!-- Connection Status Bar -->
+              <div class="video-status-bar">
+                <div class="video-status-dot"></div>
+                <span>Connected &bull; HD Video (1080p Demo)</span>
+                <span style="opacity: 0.5;">|</span>
+                <span id="callTimer">00:00</span>
+              </div>
+
+              <!-- User Picture-in-Picture (PiP) -->
+              <div class="video-pip" id="userPip">
+                <span>You (Sarah J.)</span>
+              </div>
+
+              <!-- Video Main Area (Physician Stream) -->
+              <div class="video-main">
+                <div class="video-stream-placeholder">
+                  ER
+                </div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: white;" class="disp-apt-doctor">Dr. Elena Rostova, MD</h3>
+                <p style="font-size: 0.85rem; color: #94a3b8;"><span class="disp-apt-specialty">Internal Medicine &amp; Preventive Care</span> &bull; Telepresence Room</p>
+                <div style="margin-top: 10px;">
+                  <span class="badge" style="background: rgba(14, 165, 233, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">
+                    Reviewing AI Risk Assessment Report
+                  </span>
+                </div>
+
+                <!-- Call Disconnected Overlay -->
+                <div id="videoOverlay" style="display: none; position: absolute; inset: 0; background: rgba(15, 23, 42, 0.95); flex-direction: column; align-items: center; justify-content: center; z-index: 10;">
+                  <div style="width: 60px; height: 60px; border-radius: var(--radius-full); background: #334155; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: #94a3b8;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"></path>
+                      <line x1="23" y1="1" x2="1" y2="23"></line>
+                    </svg>
+                  </div>
+                  <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 6px;">Consultation Concluded (Demo)</h3>
+                  <p style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 20px; max-width:400px; text-align:center;">
+                    Consultation notes and lifestyle recommendations have been saved to your Health Records.
+                  </p>
+                  <div style="display:flex; gap:10px;">
+                    <button id="btnReconnect" class="btn btn-primary btn-sm">Reconnect Video Room</button>
+                    <button onclick="transitionTeleState('booked')" class="btn btn-secondary btn-sm" style="color:white; border-color:#475569; background:transparent;">Back to Appointment</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Call Action Controls Toolbar -->
+              <div class="video-controls">
+                <button class="control-btn" id="btnToggleMic" title="Mute Microphone">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                    <line x1="12" y1="19" x2="12" y2="22"></line>
+                  </svg>
+                </button>
+
+                <button class="control-btn" id="btnToggleVideo" title="Disable Camera">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path>
+                    <rect x="2" y="6" width="14" height="12" rx="2"></rect>
+                  </svg>
+                </button>
+
+                <button class="control-btn" onclick="showToast('Screen sharing initialized (simulated demo)', 'info')" title="Share Screen">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </button>
+
+                <!-- Clear End Consultation Button -->
+                <button class="control-btn end-call" id="btnEndCall" title="End Consultation">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"></path>
+                    <line x1="23" y1="1" x2="1" y2="23"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Consultation Chat & Clinical Notes Sidebar -->
+            <div class="telehealth-sidebar">
+              <div style="padding: 14px 16px; border-bottom: 1px solid var(--border-light); background: var(--bg-alt); display: flex; align-items: center; justify-content: space-between;">
+                <div style="font-weight: 700; font-size: 0.95rem; color: var(--secondary);">Clinical Consultation Chat</div>
+                <span class="badge badge-success">Encrypted</span>
+              </div>
+
+              <!-- Chat Messages Container -->
+              <div class="chat-messages" id="chatMessages">
+                <div class="chat-bubble chat-doctor">
+                  <strong>Dr. Rostova:</strong> Hello Sarah, I've received your recent AI risk screening report. Your resting BP showed 124/82 mmHg with a composite risk index of 24. How have you been feeling today?
+                </div>
+                <div class="chat-bubble chat-patient">
+                  Hi Doctor! Generally good, just noticing occasional afternoon fatigue and wanted to make sure my vitals look on track.
+                </div>
+                <div class="chat-bubble chat-doctor">
+                  <strong>Dr. Rostova:</strong> That's reassuring. Your metabolic numbers and BMI are healthy. Given your familial history of hypertension, keeping a daily morning BP log will help us detect any persistent elevation early.
+                </div>
+              </div>
+
+              <!-- Chat Input -->
+              <form id="chatForm" class="chat-input-bar">
+                <input type="text" id="chatInput" class="form-control" placeholder="Ask doctor a question..." autocomplete="off" required>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    <!-- FEATURE 4: DOCTOR AVAILABILITY & TIME SLOT SELECTOR -->
+    <div id="doctorAvailability" class="page-header" style="margin-top: 48px;">
+      <div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--secondary);" data-i18n="doctor_avail_title">
+            Doctor Availability (Demo Schedule)
+          </h2>
+          <span class="badge badge-warning" data-i18n="demo_badge">DEMO DATA</span>
+        </div>
+        <p class="page-subtitle" data-i18n="doctor_avail_sub">
+          Available clinical specialists for virtual teleconsultation demo. Choose a time slot to book.
+        </p>
+      </div>
+    </div>
+
+    <div class="alert-box alert-info" style="margin-bottom: 24px;">
+      <div class="alert-text">
+        <strong>Demo Availability Notice:</strong> The doctor availability schedule below is simulated for prototype testing. You can select an open slot to book a demo appointment. Duplicate bookings for the same slot are automatically prevented.
+      </div>
+    </div>
+
+    <!-- Doctor Availability Cards with Slots -->
+    <div class="grid grid-cols-2" style="margin-bottom: 40px;" id="doctorAvailabilityGrid">
+      <!-- Populated dynamically by js/consultation.js with slot buttons -->
+    </div>
+
+    <!-- FEATURE 4: MY APPOINTMENTS SECTION -->
+    <div class="card" style="margin-bottom: 40px;">
+      <div class="card-header">
+        <h3 class="card-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span data-i18n="my_appointments_title">My Booked Appointments</span>
+        </h3>
+        <span class="badge badge-info">Stored in LocalStorage</span>
+      </div>
+
+      <div id="consultMyAppointmentsList">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Appointment Booking Modal -->
+  <div class="modal-overlay" id="bookAppointmentModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--secondary);">Schedule Virtual Clinical Consultation</h3>
+        <button onclick="closeBookingModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+      <form id="appointmentForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="modalDoctorName">Attending Physician</label>
+            <input type="text" id="modalDoctorName" class="form-control" value="Dr. Elena Rostova, MD" readonly>
+          </div>
+
+          <div class="grid grid-cols-2">
+            <div class="form-group">
+              <label class="form-label" for="aptDate">Preferred Date <span class="required">*</span></label>
+              <input type="date" id="aptDate" class="form-control" value="2026-10-16" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="aptTime">Time Slot <span class="required">*</span></label>
+              <select id="aptTime" class="form-control" required>
+                <option value="09:00 AM">09:00 AM EST</option>
+                <option value="10:30 AM" selected>10:30 AM EST</option>
+                <option value="02:00 PM">02:00 PM EST</option>
+                <option value="04:30 PM">04:30 PM EST</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="aptNotes">Reason for Consultation / Screening Findings</label>
+            <textarea id="aptNotes" class="form-control" rows="3">Review preliminary AI risk assessment findings (mild systolic elevation and cardiovascular family history).</textarea>
+          </div>
+
+          <div class="alert-box alert-info" style="margin-bottom: 0;">
+            <div class="alert-text">
+              Note: This is an in-app demo reservation. Duplicate bookings for the same time slot will be prevented. No SMS or WhatsApp messages are sent.
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeBookingModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Appointment (Demo)</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-disclaimer">
+        <strong>⚠️ Prototype Notice:</strong> The doctor teleconsultation experience is an interactive prototype simulation for hackathon presentation. It does not provide real clinical medical services or emergency dispatch.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 HealthcareAI Project • Hackathon Innovation Prototype</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="screening.html">Screening</a>
+          <a href="results.html">Results</a>
+          <a href="records.html">Records</a>
+          <a href="consultation.html">Teleconsult</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/consultation.js"></script>
+</body>
+</html>

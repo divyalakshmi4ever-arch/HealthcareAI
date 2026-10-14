@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Risk Screening &amp; Symptom Checker | HealthcareAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Hackathon Demo Banner -->
+  <div class="demo-banner">
+    <span class="badge" data-i18n="banner_badge">Hackathon Prototype</span>
+    <span data-i18n="banner_text">Simulated Risk Evaluation • Synthetic AI Algorithms • Non-Diagnostic</span>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="navbar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <path d="M12 5v6"/>
+            <path d="M9 8h6"/>
+          </svg>
+        </div>
+        HealthcareAI
+        <span class="brand-badge">PROTOTYPE</span>
+      </a>
+
+      <button class="btn-mobile-toggle" aria-label="Toggle Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></li>
+        <li><a href="dashboard.html" class="nav-link" data-i18n="nav_dashboard">Patient Dashboard</a></li>
+        <li><a href="screening.html" class="nav-link active" data-i18n="nav_screening">Risk Screening</a></li>
+        <li><a href="results.html" class="nav-link" data-i18n="nav_results">AI Results Demo</a></li>
+        <li><a href="records.html" class="nav-link" data-i18n="nav_records">Health Records</a></li>
+        <li><a href="consultation.html" class="nav-link" data-i18n="nav_consult">Doctor Teleconsult</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- FEATURE 2: Tamil / English Language Switcher -->
+        <div class="lang-toggle-wrap" title="Change Language / மொழியை மாற்றவும்">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ta">தமிழ்</button>
+        </div>
+
+        <button id="btnFillDemo" class="btn btn-secondary btn-sm" type="button">
+          <span>✨ Fill Demo Data</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container screening-page">
+
+    <!-- Page Header & Instructions -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Health Risk Screening &amp; Symptom Checker</h1>
+        <p class="page-subtitle">A standardized preliminary assessment tool for preventive cardiovascular and metabolic risk stratification.</p>
+      </div>
+      <button id="btnFillDemoSecondary" class="btn btn-outline btn-sm" type="button" onclick="document.getElementById('btnFillDemo').click();">
+        <span>Quick Demo Auto-Fill</span>
+      </button>
+    </div>
+
+    <!-- Prominent Disclaimer Alert -->
+    <div class="alert-box alert-warning">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="7" x2="12.01" y2="7"></line>
+      </svg>
+      <div>
+        <div class="alert-title">Important Prototype Notice: Non-Diagnostic Questionnaire</div>
+        <div class="alert-text">
+          This digital questionnaire is intended solely for prototype evaluation at hackathons. <strong>It does not deliver medical diagnoses or establish a physician-patient relationship.</strong> If you are experiencing acute chest pain, shortness of breath, or emergency symptoms, contact local emergency services (e.g. 911 or 112) immediately.
+        </div>
+      </div>
+    </div>
+
+    <!-- Multi-Step Progress Bar -->
+    <div class="card" style="margin-bottom: 24px; padding: 24px;">
+      <div class="stepper">
+        <div class="step-item active" id="step-indicator-1">
+          <div class="step-circle">1</div>
+          <div class="step-label">Demographics &amp; Habits</div>
+        </div>
+        <div class="step-item" id="step-indicator-2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Biometrics &amp; Labs</div>
+        </div>
+        <div class="step-item" id="step-indicator-3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Symptoms &amp; History</div>
+        </div>
+      </div>
+
+      <!-- FEATURE 3: Patient Mode vs Health Worker Assisted Mode Switcher -->
+      <div class="mode-switcher-container">
+        <button type="button" class="mode-btn active" id="btnModePatient" onclick="switchScreeningMode('patient')">
+          <span data-i18n="mode_patient">👤 Patient Self-Mode</span>
+        </button>
+        <button type="button" class="mode-btn" id="btnModeWorker" onclick="switchScreeningMode('health_worker')">
+          <span data-i18n="mode_worker">🩺 Health Worker Assisted Mode</span>
+        </button>
+      </div>
+
+      <!-- Health Worker Information & Mandatory Consent Card (Initially Hidden) -->
+      <div id="workerAssistedSection" style="display: none;">
+        <div class="worker-details-card">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <span class="badge badge-success" style="font-size: 0.78rem;">Assisted Screening Protocol</span>
+            <span style="font-size: 0.9rem; font-weight: 700; color: #166534;" data-i18n="worker_card_title">Health Worker Assisted Screening Protocol</span>
+          </div>
+          <p style="font-size: 0.84rem; color: #15803d; margin-bottom: 14px;" data-i18n="worker_card_desc">
+            You are assisting a patient to record their health biometrics. Verify informed consent prior to entering data. Do not invent medical measurements.
+          </p>
+
+          <div class="grid grid-cols-2" style="margin-bottom: 8px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="workerName" data-i18n="worker_name_label">Field Worker / Volunteer Name <span class="required">*</span></label>
+              <input type="text" id="workerName" class="form-control" placeholder="e.g. Lakshmi R., ASHA Worker" value="Lakshmi R. (ASHA Field Volunteer)">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="workerId" data-i18n="worker_id_label">Health Worker ID <span class="required">*</span></label>
+              <input type="text" id="workerId" class="form-control" placeholder="e.g. ASHA-TN-402" value="ASHA-TN-402">
+            </div>
+          </div>
+        </div>
+
+        <!-- Mandatory Patient Consent Checkbox -->
+        <div class="consent-checkbox-card">
+          <input type="checkbox" id="consentCheckbox">
+          <label for="consentCheckbox" style="font-size: 0.88rem; color: #92400e; font-weight: 600; cursor: pointer;" data-i18n="consent_label">
+            Patient Consent Verified: The patient has been informed that this is a non-diagnostic demonstration screening and has granted permission to record their health metrics.
+          </label>
+        </div>
+      </div>
+
+      <!-- Main Screening Form -->
+      <form id="screeningForm">
+
+        <!-- STEP 1: Demographics & Lifestyle -->
+        <div id="step-1" class="step-section">
+          <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 6px;">Step 1: Patient Profile &amp; Lifestyle Habits</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">Provide basic demographic information to calibrate demographic baselines.</p>
+
+          <div class="grid grid-cols-2">
+            <div class="form-group">
+              <label class="form-label" for="patientName">Full Name <span class="required">*</span></label>
+              <input type="text" id="patientName" class="form-control" value="Sarah Jenkins" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="age">Age (Years) <span class="required">*</span></label>
+              <input type="number" id="age" class="form-control" min="1" max="120" value="42" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="gender">Biological Sex <span class="required">*</span></label>
+              <select id="gender" class="form-control" required>
+                <option value="female" selected>Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other / Prefer not to say</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="activityLevel">Physical Activity Level</label>
+              <select id="activityLevel" class="form-control">
+                <option value="sedentary">Sedentary (Little or no exercise)</option>
+                <option value="moderate" selected>Moderate (2-3 days aerobic activity/week)</option>
+                <option value="active">Active (5+ days intense activity/week)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="height">Height (cm)</label>
+              <input type="number" id="height" class="form-control" value="168" placeholder="e.g. 168">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="weight">Weight (kg)</label>
+              <input type="number" id="weight" step="0.5" class="form-control" value="68.5" placeholder="e.g. 68.5">
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label" for="smokingStatus">Smoking / Tobacco History</label>
+              <select id="smokingStatus" class="form-control">
+                <option value="never" selected>Never Smoked</option>
+                <option value="former">Former Smoker (Quit > 12 months ago)</option>
+                <option value="current">Current Smoker</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Clinical Biometrics -->
+        <div id="step-2" class="step-section" style="display: none;">
+          <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 6px;">Step 2: Clinical Biometrics &amp; Lab Markers</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">Enter recent physiological measurements or home cuff readings.</p>
+
+          <div class="grid grid-cols-2">
+            <div class="form-group">
+              <label class="form-label" for="systolic">Systolic Blood Pressure (mmHg) <span class="required">*</span></label>
+              <input type="number" id="systolic" class="form-control" value="124" min="80" max="240" required>
+              <div class="form-hint">Upper number (e.g., 120 is ideal)</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="diastolic">Diastolic Blood Pressure (mmHg) <span class="required">*</span></label>
+              <input type="number" id="diastolic" class="form-control" value="82" min="50" max="140" required>
+              <div class="form-hint">Lower number (e.g., 80 is ideal)</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="fastingGlucose">Fasting Blood Glucose (mg/dL)</label>
+              <input type="number" id="fastingGlucose" class="form-control" value="96" min="50" max="350">
+              <div class="form-hint">Target normal fasting range: 70 - 99 mg/dL</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cholesterolLevel">Total Serum Cholesterol (mg/dL)</label>
+              <input type="number" id="cholesterolLevel" class="form-control" value="190" min="100" max="400">
+              <div class="form-hint">Desirable threshold: Below 200 mg/dL</div>
+            </div>
+          </div>
+
+          <div class="alert-box alert-info" style="margin-top: 10px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <div class="alert-text">
+              If you don't know your exact laboratory values, the system will use population-adjusted median estimates.
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Symptoms & Familial History -->
+        <div id="step-3" class="step-section" style="display: none;">
+          <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 6px;">Step 3: Symptom Checker &amp; Genetic Risk Factors</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">Check any symptoms experienced within the past 30 days and family medical history.</p>
+
+          <div class="form-group">
+            <label class="form-label">Recent Symptoms (Check all that apply):</label>
+            <div class="checkbox-group">
+              <label class="choice-card">
+                <input type="checkbox" name="symptoms" value="occasional_fatigue">
+                <span>Unexplained persistent fatigue</span>
+              </label>
+              <label class="choice-card">
+                <input type="checkbox" name="symptoms" value="mild_headache">
+                <span>Frequent tension headaches</span>
+              </label>
+              <label class="choice-card">
+                <input type="checkbox" name="symptoms" value="shortness_breath">
+                <span>Shortness of breath upon mild exertion</span>
+              </label>
+              <label class="choice-card">
+                <input type="checkbox" name="symptoms" value="chest_tightness">
+                <span>Chest tightness or pressure</span>
+              </label>
+              <label class="choice-card">
+                <input type="checkbox" name="symptoms" value="palpitations">
+                <span>Heart palpitations or racing pulse</span>
+              </label>
+              <label class="choice-card">
+                <input type="checkbox" name="symptoms" value="ankle_swelling">
+                <span>Ankle or lower leg swelling</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 24px;">
+            <label class="form-label">Family Medical History (First-degree relatives):</label>
+            <div class="checkbox-group">
+              <label class="choice-card">
+                <input type="checkbox" name="familyHistory" value="hypertension" checked>
+                <span>Hypertension (High Blood Pressure)</span>
+              </label>
+              <label class="choice-card">
+                <input type="checkbox" name="familyHistory" value="cardiovascular">
+                <span>Early Heart Attack / CAD</span>
+              </label>
+              <label class="choice-card">
+                <input type="checkbox" name="familyHistory" value="diabetes">
+                <span>Type 2 Diabetes Mellitus</span>
+              </label>
+              <label class="choice-card">
+                <input type="checkbox" name="familyHistory" value="stroke">
+                <span>Cerebrovascular Stroke</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Navigation Buttons -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; border-top: 1px solid var(--border-light); padding-top: 20px;">
+          <button type="button" id="btnPrev" class="btn btn-secondary" style="display: none;">
+            &larr; Previous Step
+          </button>
+          
+          <div style="margin-left: auto; display: flex; gap: 12px;">
+            <button type="button" id="btnNext" class="btn btn-primary">
+              Continue to Biometrics &rarr;
+            </button>
+            <button type="submit" id="btnSubmit" class="btn btn-accent" style="display: none;">
+              Generate AI Risk Stratification &rarr;
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <section class="card ml-demo-card" aria-labelledby="mlDemoTitle">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title" id="mlDemoTitle">Trained ML Model Demonstrations</h2>
+          <p class="page-subtitle">Enter dataset-style inputs to run one of the saved educational models.</p>
+        </div>
+      </div>
+      <div class="alert-box alert-warning">
+        <div class="alert-text">
+          Educational demonstration only. Predictions are not medically validated and must not be used for diagnosis or treatment.
+          Enter known measurements only; the form does not infer missing values from the screening questionnaire.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="mlModelSelect">Select a saved model</label>
+        <select id="mlModelSelect" class="form-control" disabled>
+          <option>Loading available models...</option>
+        </select>
+      </div>
+      <p id="mlModelDescription" class="form-hint" aria-live="polite"></p>
+      <form id="mlPredictionForm">
+        <div id="mlFeatureFields" class="ml-feature-grid"></div>
+        <button id="mlPredictButton" class="btn btn-primary" type="submit" disabled>
+          Run educational model demo
+        </button>
+      </form>
+      <div id="mlPredictionStatus" class="ml-prediction-status" role="status" aria-live="polite"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-disclaimer">
+        <strong>⚠️ Non-Medical Prototype Disclaimer:</strong> HealthcareAI screening is a technology demonstration for our hackathon project. It is not an FDA-cleared diagnostic device.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 HealthcareAI Project • Hackathon Innovation Prototype</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="screening.html">Screening</a>
+          <a href="results.html">Results</a>
+          <a href="records.html">Records</a>
+          <a href="consultation.html">Teleconsult</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/screening.js"></script>
+  <script src="js/ml-predictions.js"></script>
+</body>
+</html>

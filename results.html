@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screening Results &amp; AI Risk Analysis | HealthcareAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Hackathon Demo Banner -->
+  <div class="demo-banner">
+    <span class="badge" data-i18n="banner_badge">Hackathon Prototype</span>
+    <span data-i18n="banner_text">Simulated Risk Prediction Demo • Non-Diagnostic Evaluation • Research Demonstration</span>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="navbar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <path d="M12 5v6"/>
+            <path d="M9 8h6"/>
+          </svg>
+        </div>
+        HealthcareAI
+        <span class="brand-badge">PROTOTYPE</span>
+      </a>
+
+      <button class="btn-mobile-toggle" aria-label="Toggle Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></li>
+        <li><a href="dashboard.html" class="nav-link" data-i18n="nav_dashboard">Patient Dashboard</a></li>
+        <li><a href="screening.html" class="nav-link" data-i18n="nav_screening">Risk Screening</a></li>
+        <li><a href="results.html" class="nav-link active" data-i18n="nav_results">AI Results Demo</a></li>
+        <li><a href="records.html" class="nav-link" data-i18n="nav_records">Health Records</a></li>
+        <li><a href="consultation.html" class="nav-link" data-i18n="nav_consult">Doctor Teleconsult</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- FEATURE 2: Tamil / English Language Switcher -->
+        <div class="lang-toggle-wrap" title="Change Language / மொழியை மாற்றவும்">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ta">தமிழ்</button>
+        </div>
+
+        <a href="consultation.html" class="btn btn-primary btn-sm">
+          <span>Consult Doctor</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Primary Prominent Medical & Demo Disclaimer -->
+    <div class="alert-box alert-warning" style="box-shadow: var(--shadow-sm); border-width: 2px;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="7" x2="12.01" y2="7"></line>
+      </svg>
+      <div>
+        <div class="alert-title" style="font-size: 1.05rem;">
+          ⚠️ CRITICAL DEMO DISCLAIMER: SIMULATED RESEARCH PROTOTYPE ONLY
+        </div>
+        <div class="alert-text" style="font-size: 0.9rem;">
+          This page presents a <strong>hackathon algorithmic simulation</strong>. The disease risk percentages, model feature attributions, and clinical categorizations shown below <strong>DO NOT CLAIM TO BE A REAL MEDICAL DIAGNOSIS OR VALIDATED CLINICAL AI PREDICTION</strong>. They are synthesized for educational and user-interface demonstration purposes. If you have symptoms or questions regarding your personal health, please consult a licensed medical doctor.
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Header & Action Bar -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Screening Assessment &amp; Risk Stratification</h1>
+        <p class="page-subtitle" id="assessmentMeta">Evaluated for Sarah Jenkins (Age 42) &bull; Generated just now</p>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-secondary btn-sm" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect width="12" height="8" x="6" y="14"></rect>
+          </svg>
+          <span>Print / Export PDF</span>
+        </button>
+        <a href="consultation.html" class="btn btn-primary btn-sm">
+          <span>Discuss with Doctor &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Top Grid: Risk Gauge Score Card & Model Interpretation -->
+    <div class="grid grid-cols-12" style="margin-bottom: 28px;">
+      
+      <!-- Composite Score Gauge (Span 5) -->
+      <div class="card score-card" style="grid-column: span 5; display: flex; flex-direction: column; justify-content: center;">
+        <span class="badge badge-ai" style="margin: 0 auto 12px;">Synthetic AI Risk Score</span>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--secondary); margin-bottom: 8px;">
+          Overall Health Risk Index
+        </h2>
+
+        <!-- SVG Semi-circle Gauge -->
+        <div class="gauge-container">
+          <svg viewBox="0 0 200 110" style="width: 100%; height: 100%;">
+            <!-- Background Arc -->
+            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#e2e8f0" stroke-width="16" stroke-linecap="round" />
+            <!-- Active Score Arc (Dynamic via JS) -->
+            <path id="gaugePath" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#0284c7" stroke-width="16" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="180" />
+          </svg>
+          <div class="gauge-score">
+            <div class="num" id="riskScoreDisplay">24</div>
+            <div class="unit">/ 100 Index</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <span class="badge badge-moderate" id="riskCategoryBadge" style="font-size: 0.9rem; padding: 6px 14px;">
+            Low to Moderate Risk Profile
+          </span>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 10px;">
+          Calculated using deterministic sample weights across hemodynamics, glycemic profile, and genetic history.
+        </p>
+      </div>
+
+      <!-- AI Model Explainability & Key Drivers (Span 7) -->
+      <div class="card" style="grid-column: span 7;">
+        <div class="card-header">
+          <h3 class="card-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+            Model Explainability &amp; Attributions
+          </h3>
+          <span class="badge badge-info">Sample Feature Weights</span>
+        </div>
+
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 16px;">
+          Transparency breakdown indicating which inputted parameters exerted the highest influence on the synthetic risk index:
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;" id="attributionBars">
+          <!-- Item 1 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">
+              <span>Systolic Blood Pressure (128 mmHg)</span>
+              <span style="color: #f59e0b;">+32% influence</span>
+            </div>
+            <div style="background: #e2e8f0; height: 8px; border-radius: var(--radius-full); overflow: hidden;">
+              <div style="width: 32%; height: 100%; background: #f59e0b;"></div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">
+              <span>Familial Hypertension History</span>
+              <span style="color: #f59e0b;">+28% influence</span>
+            </div>
+            <div style="background: #e2e8f0; height: 8px; border-radius: var(--radius-full); overflow: hidden;">
+              <div style="width: 28%; height: 100%; background: #f59e0b;"></div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">
+              <span>Age Factor (42 Years)</span>
+              <span style="color: #0284c7;">+18% influence</span>
+            </div>
+            <div style="background: #e2e8f0; height: 8px; border-radius: var(--radius-full); overflow: hidden;">
+              <div style="width: 18%; height: 100%; background: #0284c7;"></div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">
+              <span>Metabolic Buffer (Normal Glucose &amp; BMI)</span>
+              <span style="color: #10b981;">-22% protective reduction</span>
+            </div>
+            <div style="background: #e2e8f0; height: 8px; border-radius: var(--radius-full); overflow: hidden;">
+              <div style="width: 22%; height: 100%; background: #10b981;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clinical Factors Table -->
+    <div class="card" style="margin-bottom: 28px;">
+      <div class="card-header">
+        <h3 class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          Detailed Clinical Factor Breakdown
+        </h3>
+        <span class="badge badge-info">Sample Biometric Assessment</span>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="records-table">
+          <thead>
+            <tr>
+              <th>Biomarker / Factor</th>
+              <th>Observed Value</th>
+              <th>Clinical Reference Guidance</th>
+              <th>Evaluation Status</th>
+            </tr>
+          </thead>
+          <tbody id="factorsTableBody">
+            <!-- Dynamically populated via JS -->
+            <tr>
+              <td><strong>Blood Pressure</strong></td>
+              <td>124 / 82 mmHg</td>
+              <td>Target: &lt; 120/80 mmHg</td>
+              <td><span class="badge badge-warning">Borderline Elevation</span></td>
+            </tr>
+            <tr>
+              <td><strong>Body Mass Index (BMI)</strong></td>
+              <td>24.3 kg/m²</td>
+              <td>Normal Range: 18.5 - 24.9</td>
+              <td><span class="badge badge-success">Optimal</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fasting Glucose</strong></td>
+              <td>96 mg/dL</td>
+              <td>Normal: 70 - 99 mg/dL</td>
+              <td><span class="badge badge-success">Normal Range</span></td>
+            </tr>
+            <tr>
+              <td><strong>Reported Symptoms</strong></td>
+              <td>Mild tension fatigue</td>
+              <td>Transient non-cardiac indicators</td>
+              <td><span class="badge badge-info">Low Urgency</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Recommendations & Next Actions Grid -->
+    <div class="grid grid-cols-2" style="margin-bottom: 28px;">
+      
+      <!-- Preventive Lifestyle Recommendations -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            Suggested Preventive Lifestyle Measures
+          </h3>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700;">1</div>
+            <div>
+              <h4 style="font-size: 0.92rem; font-weight: 700; color: var(--secondary);">Sodium Intake Modification</h4>
+              <p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 2px;">
+                Maintain daily dietary sodium under 2,000 mg to assist in stabilizing resting systolic blood pressure.
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: #ccfbf1; color: #0d9488; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700;">2</div>
+            <div>
+              <h4 style="font-size: 0.92rem; font-weight: 700; color: var(--secondary);">Aerobic Exercise Maintenance</h4>
+              <p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 2px;">
+                Target 150 minutes of moderate-intensity cardiovascular exercise (such as brisk walking or swimming) weekly.
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: #fef3c7; color: #d97706; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700;">3</div>
+            <div>
+              <h4 style="font-size: 0.92rem; font-weight: 700; color: var(--secondary);">Clinical Telehealth Review</h4>
+              <p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 2px;">
+                Review these risk factor observations with a licensed medical professional during your next virtual consult.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direct Doctor Action Card -->
+      <div class="card" style="background: linear-gradient(135deg, #f0fdf4, #ffffff); border-color: #86efac; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <span class="badge badge-success" style="margin-bottom: 12px;">Physician-in-the-Loop</span>
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: #166534; margin-bottom: 8px;">
+            Ready to review these findings with a licensed clinician?
+          </h3>
+          <p style="font-size: 0.88rem; color: #374151; line-height: 1.5; margin-bottom: 20px;">
+            HealthcareAI makes it effortless to transmit this preliminary report securely to a remote specialist. Connect with our available board-certified physicians for tailored clinical guidance.
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="consultation.html" class="btn btn-primary btn-lg" style="background: #16a34a; border-color: #15803d; justify-content: center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path>
+              <rect x="2" y="6" width="14" height="12" rx="2"></rect>
+            </svg>
+            <span>Start Virtual Doctor Consultation Now</span>
+          </a>
+          <a href="dashboard.html" class="btn btn-secondary" style="justify-content: center;">
+            <span>Return to Patient Dashboard</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-disclaimer">
+        <strong>⚠️ Prototype Notice:</strong> HealthcareAI screening is a technology demonstration for our hackathon project. It is not an FDA-cleared diagnostic device.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 HealthcareAI Project • Hackathon Innovation Prototype</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="screening.html">Screening</a>
+          <a href="results.html">Results</a>
+          <a href="records.html">Records</a>
+          <a href="consultation.html">Teleconsult</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Hydrate results from localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+      const stored = localStorage.getItem('currentAssessment');
+      if (stored) {
+        try {
+          const data = JSON.parse(stored);
+
+          // Update Score & Category
+          const scoreEl = document.getElementById('riskScoreDisplay');
+          const badgeEl = document.getElementById('riskCategoryBadge');
+          const metaEl = document.getElementById('assessmentMeta');
+          const gaugePath = document.getElementById('gaugePath');
+
+          if (scoreEl) scoreEl.textContent = data.riskScore || 24;
+          if (badgeEl && data.overallRisk) {
+            badgeEl.textContent = data.overallRisk;
+            if (data.riskCategory === 'elevated') {
+              badgeEl.className = 'badge badge-elevated';
+              if (gaugePath) gaugePath.setAttribute('stroke', '#ef4444');
+            } else if (data.riskCategory === 'moderate') {
+              badgeEl.className = 'badge badge-moderate';
+              if (gaugePath) gaugePath.setAttribute('stroke', '#f59e0b');
+            } else {
+              badgeEl.className = 'badge badge-low';
+              if (gaugePath) gaugePath.setAttribute('stroke', '#10b981');
+            }
+          }
+
+          // Gauge dashoffset calculation: arc length is approx 251
+          if (gaugePath) {
+            const fraction = Math.min(Math.max((data.riskScore || 24) / 100, 0.05), 1);
+            const offset = 251 - (251 * fraction);
+            gaugePath.setAttribute('stroke-dashoffset', offset);
+          }
+
+          if (metaEl && data.patientName) {
+            let metaText = `Evaluated for ${data.patientName} (Age ${data.age}) • Assessment ID: #${Math.floor(1000 + Math.random() * 9000)}`;
+            if (data.screeningMode === 'health_worker') {
+              metaText += ` • 🩺 Assisted by: ${data.assistedBy || 'Health Worker'} (ID: ${data.workerId || 'N/A'}) [Consent Verified ✓]`;
+            }
+            metaEl.textContent = metaText;
+          }
+
+          // Populate factors table if array exists
+          if (data.factors && data.factors.length > 0) {
+            const tbody = document.getElementById('factorsTableBody');
+            if (tbody) {
+              tbody.innerHTML = '';
+              data.factors.forEach(f => {
+                const tr = document.createElement('tr');
+                const badgeClass = f.severity === 'warning' ? 'badge-warning' : (f.severity === 'danger' ? 'badge-danger' : 'badge-success');
+                tr.innerHTML = `
+                  <td><strong>${f.name}</strong></td>
+                  <td>${f.value}</td>
+                  <td>${f.name === 'Blood Pressure' ? 'Target: < 120/80 mmHg' : (f.name === 'Fasting Blood Glucose' ? 'Target: < 100 mg/dL' : 'Standard clinical threshold')}</td>
+                  <td><span class="badge ${badgeClass}">${f.status}</span></td>
+                `;
+                tbody.appendChild(tr);
+              });
+            }
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

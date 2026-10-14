@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electronic Health Records | HealthcareAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Hackathon Demo Banner -->
+  <div class="demo-banner">
+    <span class="badge">Hackathon Prototype</span>
+    <span>Simulated Health Records • Demonstration Electronic Medical Record (EMR)</span>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="navbar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <path d="M12 5v6"/>
+            <path d="M9 8h6"/>
+          </svg>
+        </div>
+        HealthcareAI
+        <span class="brand-badge">PROTOTYPE</span>
+      </a>
+
+      <button class="btn-mobile-toggle" aria-label="Toggle Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></li>
+        <li><a href="dashboard.html" class="nav-link" data-i18n="nav_dashboard">Patient Dashboard</a></li>
+        <li><a href="screening.html" class="nav-link" data-i18n="nav_screening">Risk Screening</a></li>
+        <li><a href="results.html" class="nav-link" data-i18n="nav_results">AI Results Demo</a></li>
+        <li><a href="records.html" class="nav-link active" data-i18n="nav_records">Health Records</a></li>
+        <li><a href="consultation.html" class="nav-link" data-i18n="nav_consult">Doctor Teleconsult</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- FEATURE 2: Tamil / English Language Switcher -->
+        <div class="lang-toggle-wrap" title="Change Language / மொழியை மாற்றவும்">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ta">தமிழ்</button>
+        </div>
+
+        <button class="btn btn-primary btn-sm" onclick="openModal('addRecordModal')">
+          <span>+ Upload / Add Record</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Electronic Health Records &amp; Diagnostic History</h1>
+        <p class="page-subtitle">Unified timeline of laboratory results, cardiology reports, and clinical notes for Sarah Jenkins.</p>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <a href="sample_report.pdf" target="_blank" class="btn btn-outline btn-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <span>Sample PDF File</span>
+        </a>
+        <button class="btn btn-secondary btn-sm" onclick="showToast('Exporting medical records archive...', 'info')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Export FHIR / JSON</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Patient Medical Profile Summary Card -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="grid grid-cols-4">
+        <div>
+          <div class="metric-label">Patient Record ID</div>
+          <div style="font-weight: 800; font-size: 1.1rem; color: var(--secondary); margin-top: 4px;">HC-2026-981</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Verified National Registry</div>
+        </div>
+        <div>
+          <div class="metric-label">Primary Care Provider</div>
+          <div style="font-weight: 800; font-size: 1.1rem; color: var(--secondary); margin-top: 4px;">Dr. Elena Rostova</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Metro Preventive Health</div>
+        </div>
+        <div>
+          <div class="metric-label">Allergies &amp; Alerts</div>
+          <div style="font-weight: 800; font-size: 1.1rem; color: var(--danger); margin-top: 4px;">Penicillin (Hives)</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Updated May 2026</div>
+        </div>
+        <div>
+          <div class="metric-label">Blood Group / Rh</div>
+          <div style="font-weight: 800; font-size: 1.1rem; color: var(--secondary); margin-top: 4px;">O Rh Positive</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Donor Registered</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Records Filter & Table -->
+    <div class="card" style="margin-bottom: 28px;">
+      <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
+        <h3 class="card-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          Clinical Reports &amp; Laboratory Test Archive
+        </h3>
+
+        <!-- Filter tabs -->
+        <div style="display: flex; gap: 6px;">
+          <button class="btn btn-sm btn-primary filter-btn" onclick="filterRecords('all', this)">All (5)</button>
+          <button class="btn btn-sm btn-secondary filter-btn" onclick="filterRecords('Laboratory', this)">Laboratory</button>
+          <button class="btn btn-sm btn-secondary filter-btn" onclick="filterRecords('Cardiology', this)">Cardiology</button>
+          <button class="btn btn-sm btn-secondary filter-btn" onclick="filterRecords('Immunization', this)">Immunization</button>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="records-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Test / Document Title</th>
+              <th>Facility &amp; Physician</th>
+              <th>Clinical Status</th>
+              <th>Notes &amp; Observations</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="recordsTableBody">
+            <tr data-cat="Laboratory">
+              <td><strong>2026-10-02</strong></td>
+              <td><span class="badge badge-info">Laboratory</span></td>
+              <td><strong>Comprehensive Metabolic Panel (CMP)</strong></td>
+              <td>Metro Health Labs<br><small style="color:var(--text-muted);">Dr. Elena Rostova</small></td>
+              <td><span class="badge badge-success">Normal</span></td>
+              <td>All kidney &amp; liver enzymes within standard biological reference ranges.</td>
+              <td>
+                <a href="report.html?id=REC-104&title=Comprehensive%20Metabolic%20Panel%20(CMP)&category=Laboratory&facility=Metro%20Health%20Labs&physician=Dr.%20Elena%20Rostova%2C%20MD&date=2026-10-02&status=Normal&notes=All%20kidney%20and%20liver%20enzymes%20within%20standard%20biological%20reference%20ranges." target="_blank" class="btn btn-outline btn-sm">
+                  <span>View PDF</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </td>
+            </tr>
+            <tr data-cat="Cardiology">
+              <td><strong>2026-09-14</strong></td>
+              <td><span class="badge badge-ai">Cardiology</span></td>
+              <td><strong>12-Lead Resting Electrocardiogram (ECG)</strong></td>
+              <td>City Cardiology Center<br><small style="color:var(--text-muted);">Dr. Marcus Vance</small></td>
+              <td><span class="badge badge-success">Normal Sinus</span></td>
+              <td>Resting rate 72 bpm, PR 148ms, QRS 88ms. No acute ST-T deviations.</td>
+              <td>
+                <a href="report.html?id=REC-103&title=12-Lead%20Resting%20Electrocardiogram%20(ECG)&category=Cardiology&facility=City%20Cardiology%20Center&physician=Dr.%20Marcus%20Vance%2C%20MD&date=2026-09-14&status=Normal%20Sinus&notes=Resting%20rate%2072%20bpm%2C%20PR%20148ms%2C%20QRS%2088ms.%20No%20acute%20ST-T%20deviations." target="_blank" class="btn btn-outline btn-sm">
+                  <span>View PDF</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </td>
+            </tr>
+            <tr data-cat="Laboratory">
+              <td><strong>2026-08-20</strong></td>
+              <td><span class="badge badge-info">Laboratory</span></td>
+              <td><strong>Lipid Profile &amp; HbA1c Panel</strong></td>
+              <td>Metro Health Labs<br><small style="color:var(--text-muted);">Dr. David Chen</small></td>
+              <td><span class="badge badge-warning">Borderline</span></td>
+              <td>Total Chol: 198 mg/dL, LDL: 114 mg/dL, HbA1c: 5.4% (Healthy glycemic control).</td>
+              <td>
+                <a href="report.html?id=REC-102&title=Lipid%20Profile%20%26%20HbA1c%20Panel&category=Laboratory&facility=Metro%20Health%20Labs&physician=Dr.%20David%20Chen%2C%20MD&date=2026-08-20&status=Borderline&notes=Total%20Chol%3A%20198%20mg%2FdL%2C%20LDL%3A%20114%20mg%2FdL%2C%20HbA1c%3A%205.4%25%20(Healthy%20glycemic%20control)." target="_blank" class="btn btn-outline btn-sm">
+                  <span>View PDF</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </td>
+            </tr>
+            <tr data-cat="Immunization">
+              <td><strong>2026-05-11</strong></td>
+              <td><span class="badge badge-moderate">Immunization</span></td>
+              <td><strong>Seasonal Influenza &amp; Tdap Booster</strong></td>
+              <td>Community Health Clinic<br><small style="color:var(--text-muted);">Dr. Amira Patel</small></td>
+              <td><span class="badge badge-success">Completed</span></td>
+              <td>Administered left deltoid. No adverse acute histamine response.</td>
+              <td>
+                <a href="report.html?id=REC-101&title=Seasonal%20Influenza%20%26%20Tdap%20Booster&category=Immunization&facility=Community%20Health%20Clinic&physician=Dr.%20Amira%20Patel%2C%20MD&date=2026-05-11&status=Completed&notes=Administered%20left%20deltoid.%20No%20adverse%20acute%20histamine%20response." target="_blank" class="btn btn-outline btn-sm">
+                  <span>View PDF</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </td>
+            </tr>
+            <tr data-cat="Cardiology">
+              <td><strong>2026-02-18</strong></td>
+              <td><span class="badge badge-ai">Cardiology</span></td>
+              <td><strong>Transthoracic Echocardiogram (TTE)</strong></td>
+              <td>Heart &amp; Vascular Institute<br><small style="color:var(--text-muted);">Dr. Marcus Vance</small></td>
+              <td><span class="badge badge-success">Normal LVEF</span></td>
+              <td>Left ventricular ejection fraction preserved (62%), normal diastolic function.</td>
+              <td>
+                <a href="report.html?id=REC-100&title=Transthoracic%20Echocardiogram%20(TTE)&category=Cardiology&facility=Heart%20%26%20Vascular%20Institute&physician=Dr.%20Marcus%20Vance%2C%20MD&date=2026-02-18&status=Normal%20LVEF&notes=Left%20ventricular%20ejection%20fraction%20preserved%20(62%25)%2C%20normal%20diastolic%20function." target="_blank" class="btn btn-outline btn-sm">
+                  <span>View PDF</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Add Record Modal -->
+  <div class="modal-overlay" id="addRecordModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--secondary);">Upload / Add Clinical Record</h3>
+        <button onclick="closeModal('addRecordModal')" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+      <form id="newRecordForm" onsubmit="handleNewRecord(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="recordTitle">Report / Record Title <span class="required">*</span></label>
+            <input type="text" id="recordTitle" class="form-control" placeholder="e.g. Annual Blood Chemistry" required>
+          </div>
+          <div class="grid grid-cols-2">
+            <div class="form-group">
+              <label class="form-label" for="recordCat">Category</label>
+              <select id="recordCat" class="form-control">
+                <option value="Laboratory">Laboratory</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Immunization">Immunization</option>
+                <option value="Radiology">Radiology / Imaging</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="recordDate">Date of Service</label>
+              <input type="date" id="recordDate" class="form-control" value="2026-10-13" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="recordFacility">Facility &amp; Attending Physician</label>
+            <input type="text" id="recordFacility" class="form-control" placeholder="e.g. Metro Clinic - Dr. Elena Rostova" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="recordNotes">Clinical Notes / Findings</label>
+            <textarea id="recordNotes" class="form-control" rows="3" placeholder="Key observations or test outcomes..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('addRecordModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save to EMR</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-disclaimer">
+        <strong>⚠️ Prototype Notice:</strong> The health records displayed on this page are sample synthetic data populated for hackathon user testing.
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 HealthcareAI Project • Hackathon Innovation Prototype</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="screening.html">Screening</a>
+          <a href="results.html">Results</a>
+          <a href="records.html">Records</a>
+          <a href="consultation.html">Teleconsult</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    function filterRecords(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.className = 'btn btn-sm btn-secondary filter-btn';
+      });
+      btn.className = 'btn btn-sm btn-primary filter-btn';
+
+      const rows = document.querySelectorAll('#recordsTableBody tr');
+      rows.forEach(row => {
+        if (category === 'all' || row.getAttribute('data-cat') === category) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    function handleNewRecord(e) {
+      e.preventDefault();
+      const title = document.getElementById('recordTitle').value;
+      const cat = document.getElementById('recordCat').value;
+      const date = document.getElementById('recordDate').value;
+      const facility = document.getElementById('recordFacility').value;
+      const notes = document.getElementById('recordNotes').value;
+
+      const reportUrl = `report.html?title=${encodeURIComponent(title)}&category=${encodeURIComponent(cat)}&date=${encodeURIComponent(date)}&facility=${encodeURIComponent(facility)}&notes=${encodeURIComponent(notes)}&status=Saved&physician=Attending%20Clinician`;
+
+      const tbody = document.getElementById('recordsTableBody');
+      const tr = document.createElement('tr');
+      tr.setAttribute('data-cat', cat);
+      tr.innerHTML = `
+        <td><strong>${date}</strong></td>
+        <td><span class="badge badge-info">${cat}</span></td>
+        <td><strong>${title}</strong></td>
+        <td>${facility}</td>
+        <td><span class="badge badge-success">Saved</span></td>
+        <td>${notes || 'Uploaded via patient portal.'}</td>
+        <td>
+          <a href="${reportUrl}" target="_blank" class="btn btn-outline btn-sm">
+            <span>View PDF</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </td>
+      `;
+      tbody.prepend(tr);
+
+      closeModal('addRecordModal');
+      document.getElementById('newRecordForm').reset();
+      showToast(`✨ Record "${title}" successfully saved! Click "View PDF" to open it.`, "info");
+    }
+  </script>
+</body>
+</html>
